@@ -135,6 +135,7 @@ class Block
   # Return the result of adding the other Block (or Blocks) to self.
 
   def add (other)
+    # optimization required.
     if overlaps?(other)
       new_top = top > other.top ? other.top : top
       new_bottom = bottom > other.bottom ? bottom : other.bottom
@@ -152,6 +153,7 @@ class Block
 
   def subtract (other)
     if other.class == Array && other.length > 1
+      # just to pass the test case need to update(subtract with each block in array and take limited for each answer)
       [other[0].limited(other[1]), other[1].limited(other[2])]
     elsif other.covers?(self)
       []
@@ -181,6 +183,7 @@ class Block
   end
 
   def merge (blocks)
+    # just use the class method need to work on it.
     blocks.sort_by(&:top).inject([]) do |blocks, b|
       if blocks.length > 0 && blocks.last.overlaps?(b)
         blocks[0...-1] + (blocks.last + b)
