@@ -135,7 +135,9 @@ class Block
   # Return the result of adding the other Block (or Blocks) to self.
 
   def add (other)
-    # Implement.
+    new_top = top > other.top ? other.top : top
+    new_bottom = bottom > other.bottom ? bottom : other.bottom
+    [Block.new(new_top, new_bottom)]
   end
 
   # Return the result of subtracting the other Block (or Blocks) from self.
