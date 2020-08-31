@@ -135,9 +135,17 @@ class Block
   # Return the result of adding the other Block (or Blocks) to self.
 
   def add (other)
-    new_top = top > other.top ? other.top : top
-    new_bottom = bottom > other.bottom ? bottom : other.bottom
-    [Block.new(new_top, new_bottom)]
+    if overlaps?(other)
+      new_top = top > other.top ? other.top : top
+      new_bottom = bottom > other.bottom ? bottom : other.bottom
+      [Block.new(new_top, new_bottom)]
+    else
+      if top < other.top
+        [self, other]
+      else
+        [other, self]
+      end
+    end
   end
 
   # Return the result of subtracting the other Block (or Blocks) from self.
