@@ -151,19 +151,17 @@ class Block
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
-    new_arr = []
-    block_arr = []
-    [self, other].flatten.each do |block|
-      new_arr.push(block.top)
-      new_arr.push(block.bottom)
+    if other.class == Array && other.length > 1
+      [other[0].limited(other[1]), other[1].limited(other[2])]
+    elsif other.covers?(self)
+      []
+    elsif intersects_bottom?(other)
+      [trim_from(other.bottom)]
+    elsif intersects_top?(other)
+      [trim_to(other.top)]
+    else
+      split(other)
     end
-    new_arr.sort!
-    num = 0
-    while num < new_arr.length
-      block_arr.push(Block.new(new_arr[num], new_arr[num+1]))
-      num += 2
-    end
-    block_arr
   end
 
   alias :- :subtract
