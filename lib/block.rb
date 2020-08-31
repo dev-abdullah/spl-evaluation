@@ -170,7 +170,13 @@ class Block
     end
   end
 
-  def merge (others)
-    # Implement.
+  def merge (blocks)
+    blocks.sort_by(&:top).inject([]) do |blocks, b|
+      if blocks.length > 0 && blocks.last.overlaps?(b)
+        blocks[0...-1] + (blocks.last + b)
+      else
+        blocks + [b]
+      end
+    end
   end
 end
