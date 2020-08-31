@@ -16,6 +16,7 @@
 #   Block.new(5, 25) - Block.new(10, 20) == [Block.new(5, 10), Block.new(20, 25)]
 #
 class Block
+  require 'byebug'
 
   def initialize (from, to)
     if to < from
@@ -130,13 +131,13 @@ class Block
   # =============
   # = Operators =
   # =============
-  
+
   # Return the result of adding the other Block (or Blocks) to self.
 
   def add (other)
     # Implement.
   end
-  
+
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)

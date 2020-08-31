@@ -1,5 +1,6 @@
 require_relative "../lib/block"
 require 'rspec/its'
+require 'byebug'
 
 describe Block do
 
